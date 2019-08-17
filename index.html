@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Todo</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
 </head>
@@ -18,21 +19,21 @@
                         <div class="row">
                             <form id="task-form">
                                 <div class="input-field col s12">
-                                    <input type="text" name="task" id="task">
+                                    <input type="text" name="task" id="task"> <!--input here-->
                                     <label for="task">New Task</label>
                                 </div>
-                                <input type="submit" value="Add Task" class="btn">
+                                <input type="submit" value="Add Task" class="btn" id="submit"><!--Add Task-->
                             </form>
                         </div>
                     </div>
                     <div class="card-action">
                         <h5 id="task-title">Tasks</h5>
                         <div class="input-field col s12">
-                                <input type="text" name="filter" id="filter">
+                                <input type="text" name="filter" id="filter"><!--Filter Tasks-->
                                 <label for="filter">Filter Task</label>
                         </div>
                         <ul class="collection"></ul>
-                        <a href="#" class="clear-task btn black">Clear Task</a>
+                        <a href="#" class="clear-task btn black">Clear Task</a><!--Clear Tasks-->
                     </div>
                 </div>
             </div>
@@ -40,7 +41,7 @@
     </div>
 
 
-
+    <script src="./app.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
