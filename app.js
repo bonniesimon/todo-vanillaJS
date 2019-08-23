@@ -15,12 +15,27 @@ const clearBtn = document.querySelector('.clear-task');
 let todos = [];
 todos = JSON.parse(localStorage.getItem('todos'));
 // console.log(JSON.parse(localStorage.getItem('todos')));
+
 console.log(todos);
 
 loadEventListners();
 
 //Load all event listners
 function loadEventListners(){
+
+    //Load todos
+    if (todos == null){
+        console.log("Don't display");
+    }else{
+        displayTodos();
+    }
+    //Function to display all todos
+    function displayTodos(){
+            todos_list = JSON.parse(localStorage.getItem('todos'));
+            todos_list.forEach(item => {
+                createList(item);
+            });
+    }
 
     //adding tasks
     form.addEventListener('submit' , (e)=> {
@@ -43,6 +58,18 @@ function loadEventListners(){
         document.querySelector('#task').value = '';
         e.preventDefault();
     });
+
+    function createList(taskItem){
+        const li = document.createElement('li');
+        li.className='collection-item';
+        li.appendChild(document.createTextNode(taskItem));
+        //creating link
+        const link = document.createElement('a');
+        link.className='delete-item secondary-content';
+        link.innerHTML = '<i class="fa fa-remove"></i>';
+        li.appendChild(link);
+        collection.appendChild(li);
+    }
 
     //Adding tasks to localStorage
     function inputToLocalStorage(task){
@@ -73,7 +100,7 @@ function loadEventListners(){
         if(todos.length==0){
             todos = null;
         }
-        console.log(todos_new);
+        
     }
 
     //Clear Tasks
@@ -81,6 +108,8 @@ function loadEventListners(){
         while(collection.firstChild){
             collection.removeChild(collection.firstChild);
         }
+        let todos_clear = JSON.parse(localStorage.getItem('todos'));
+        todos_clear.forEach(item => removeFromLocalStorage(item));
     })
      
 
@@ -122,6 +151,9 @@ THINGS I LEARNED:
 -how to clear out all tasks using firstChild and removeChild
 -JSON.stringify(obj); to convert an object such as array into string form.
 -JSON.parse(str); to convert a string to obj form
+-Learned localStorage
+    -localStorage.setItem('key','value'); to input items into localStorage
+    -localStorage.getItem('key'); to get items from localStorage
 */
 
 
