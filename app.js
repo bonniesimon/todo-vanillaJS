@@ -13,7 +13,8 @@ const clearBtn = document.querySelector('.clear-task');
 // }
 
 let todos = [];
-todos.push(localStorage.getItem('todos'));
+todos = JSON.parse(localStorage.getItem('todos'));
+// console.log(JSON.parse(localStorage.getItem('todos')));
 console.log(todos);
 
 loadEventListners();
@@ -45,10 +46,12 @@ function loadEventListners(){
 
     //Adding tasks to localStorage
     function inputToLocalStorage(task){
-        if( todos[0] === null){
+        if( todos === null){
             todos = [task];
         }else{
-            todos = [...todos , task];
+            // todos[0] = JSON.parse(localStorage.getItem('todos'));
+            todos.push(task);
+            console.log('After adding : ',todos);
         }
         localStorage.setItem('todos',JSON.stringify(todos));
     }
@@ -57,10 +60,21 @@ function loadEventListners(){
     collection.addEventListener('click' , (e)=>{
         // console.log(e.target);
         if(e.target.parentElement.classList.contains('delete-item') || e.target.classList.contains('delete-item') ){
-            console.log(e.target.parentElement.parentElement.innerText);
-            e.target.parentElement.parentElement.remove();
+            // console.log(e.target.parentElement.parentElement.innerText);
+            removeFromLocalStorage(e.target.parentElement.parentElement.innerText);
+            e.target.parentElement.parentElement.remove(e.target.parentElement.parentElement.innerText);
         }
     });
+
+    function removeFromLocalStorage(task){
+        todos_new = JSON.parse(localStorage.getItem('todos'));
+        todos_new = todos_new.filter(item => item!=task);
+        localStorage.setItem('todos', JSON.stringify(todos_new));
+        if(todos.length==0){
+            todos = null;
+        }
+        console.log(todos_new);
+    }
 
     //Clear Tasks
     clearBtn.addEventListener('click' , (e) =>{
