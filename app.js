@@ -61,15 +61,15 @@ function loadEventListners(){
         // console.log(e.target);
         if(e.target.parentElement.classList.contains('delete-item') || e.target.classList.contains('delete-item') ){
             // console.log(e.target.parentElement.parentElement.innerText);
-            removeFromLocalStorage(e.target.parentElement.parentElement.innerText);
             e.target.parentElement.parentElement.remove(e.target.parentElement.parentElement.innerText);
+            removeFromLocalStorage(e.target.parentElement.parentElement.innerText);
         }
     });
 
     function removeFromLocalStorage(task){
-        todos_new = JSON.parse(localStorage.getItem('todos'));
-        todos_new = todos_new.filter(item => item!=task);
-        localStorage.setItem('todos', JSON.stringify(todos_new));
+        todos = JSON.parse(localStorage.getItem('todos'));
+        todos = todos.filter(item => item!=task);
+        localStorage.setItem('todos', JSON.stringify(todos));
         if(todos.length==0){
             todos = null;
         }
