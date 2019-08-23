@@ -7,11 +7,14 @@ const clearBtn = document.querySelector('.clear-task');
 
 
 
+
 // const addTaskItem = (item) => {
 //     collection.innerHTML = `${collection.innerHTML}<li class="collection-item"><p class="center-align">${item} <button class="btn red delete">X</button></p></li>`;
 // }
 
-
+let todos = [];
+todos.push(localStorage.getItem('todos'));
+console.log(todos);
 
 loadEventListners();
 
@@ -24,7 +27,7 @@ function loadEventListners(){
             alert('Input Task, not emptiness!! xD');
         }else{
             let item = taskInput.value;
-            // console.log(item);
+            //local storage
             const li = document.createElement('li');
             li.className='collection-item';
             li.appendChild(document.createTextNode(item));
@@ -34,17 +37,28 @@ function loadEventListners(){
             link.innerHTML = '<i class="fa fa-remove"></i>';
             li.appendChild(link);
             collection.appendChild(li);
+            inputToLocalStorage(taskInput.value);
         }
         document.querySelector('#task').value = '';
         e.preventDefault();
     });
 
+    //Adding tasks to localStorage
+    function inputToLocalStorage(task){
+        if( todos[0] === null){
+            todos = [task];
+        }else{
+            todos = [...todos , task];
+        }
+        localStorage.setItem('todos',JSON.stringify(todos));
+    }
+
     //Removing Tasks
     collection.addEventListener('click' , (e)=>{
         // console.log(e.target);
         if(e.target.parentElement.classList.contains('delete-item') || e.target.classList.contains('delete-item') ){
+            console.log(e.target.parentElement.parentElement.innerText);
             e.target.parentElement.parentElement.remove();
-            
         }
     });
 
@@ -92,6 +106,8 @@ THINGS I LEARNED:
 -how to remove items properly in a todo list
 -how to filter through a list of items using indexOf();
 -how to clear out all tasks using firstChild and removeChild
+-JSON.stringify(obj); to convert an object such as array into string form.
+-JSON.parse(str); to convert a string to obj form
 */
 
 
